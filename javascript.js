@@ -64,6 +64,15 @@ function removeFromCart(index) {
   updateCartDisplay();
 }
 
+function removeOne(index) {
+  if (cartItems[index].quantity > 1) {
+    cartItems[index].quantity -= 1;
+  } else {
+    cartItems.splice(index, 1);
+  }
+  updateCartDisplay();
+}
+
 function updateCartDisplay() {
   const cartContent = document.getElementById('cart-content');
   cartContent.innerHTML = '';
@@ -78,7 +87,10 @@ function updateCartDisplay() {
           <div>${item.title}</div>
           <div>Price: $${item.price}</div>
           <div>Quantity: ${item.quantity}</div>
-          <button onclick="removeFromCart(${index})">Remove</button>
+          <div style="display: flex; gap: 5px; margin-top: 5px;">
+            <button onclick="removeOne(${index})">➖ Remove 1</button>
+            <button onclick="removeFromCart(${index})">❌ Remove All</button>
+          </div>
         </div>
       </div>
     `;
